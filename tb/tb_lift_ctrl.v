@@ -52,9 +52,9 @@ module tb_lift_ctrl;
         end
     endtask
 
-    task press(input [3:0] outside, input [3:0] inside, input pin);   // held for one clock
+    task press(input [3:0] at_floor, input [3:0] in_cabin, input pin);   // held for one clock
         begin
-            floor_call = outside; cabin_call = inside; pin_ok = pin;
+            floor_call = at_floor; cabin_call = in_cabin; pin_ok = pin;
             @(posedge clk); #1;
             floor_call = 4'd0; cabin_call = 4'd0; pin_ok = 1'b0;
         end
