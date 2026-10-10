@@ -9,13 +9,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Icarus Verilog
         run: sudo apt-get update && sudo apt-get install -y iverilog
-      - name: Original lab design (rtl/el.v)
+      - name: Lift controller (rtl/lift_ctrl.v)
         run: |
-          iverilog -g2012 -o el.vvp rtl/el.v tb/tb_el.v
+          iverilog -g2012 -o lift.vvp rtl/lift_ctrl.v tb/tb_lift_ctrl.v
+          vvp lift.vvp | tee lift.log
+          grep -q "ALL TESTS PASSED" lift.log
+      - name: Lab version (lab/el.v)
+        run: |
+          iverilog -g2012 -o el.vvp lab/el.v lab/tb_el.v
           vvp el.vvp | tee el.log
           grep -q "ALL TESTS PASSED" el.log
-      - name: Reworked FSM (v2/elevator_fsm.v)
-        run: |
-          iverilog -g2012 -o fsm.vvp v2/elevator_fsm.v v2/tb_elevator_fsm.v
-          vvp fsm.vvp | tee fsm.log
-          grep -q "ALL TESTS PASSED" fsm.log

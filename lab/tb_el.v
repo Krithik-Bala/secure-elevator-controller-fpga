@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-// Self-checking testbench for the original lab design (rtl/el.v).
+// Self-checking testbench for the original lab design (lab/el.v).
 // i_f is the present-floor sensor input. Like a real floor sensor, the testbench
 // feeds the car's position (c_f) back into i_f after every move.
 module tb_el;
