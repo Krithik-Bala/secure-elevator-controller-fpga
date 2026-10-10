@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 // Self-checking testbench for the original lab design (lab/el.v).
 // i_f is the present-floor sensor input. Like a real floor sensor, the testbench
-// feeds the car's position (c_f) back into i_f after every move.
+// feeds the lift's position (c_f) back into i_f after every move.
 module tb_el;
     reg  [1:0] i_f, f_f, pin;
     reg        clk, ov, fa;
@@ -37,10 +37,10 @@ module tb_el;
         ov = 0; fa = 0; pin = 2'b00; i_f = 2'b00; f_f = 2'b00;
 
         // There is no reset: the fire alarm is the first thing that gives c_f a known value.
-        fa = 1; step; check(2'b00, 1'b0, "fire alarm puts the car at the ground floor");
+        fa = 1; step; check(2'b00, 1'b0, "fire alarm puts the lift at the ground floor");
         fa = 0;
 
-        // Normal travel up, one floor per clock, i_f following the car
+        // Normal travel up, one floor per clock, i_f following the lift
         f_f = 2'b11; i_f = c_f;
         step; check(2'b01, 1'b1, "normal travel up: floor 1");
         i_f = c_f; step; check(2'b10, 1'b1, "normal travel up: floor 2");
@@ -53,10 +53,10 @@ module tb_el;
         i_f = c_f; step; check(2'b01, 1'b0, "normal travel down: floor 1");
         i_f = c_f; step; check(2'b01, 1'b0, "arrived at floor 1");
 
-        // Overload holds the car even with a pending request
+        // Overload holds the lift even with a pending request
         ov = 1; f_f = 2'b11; i_f = c_f;
         for (n = 0; n < 3; n = n + 1) step;
-        check(2'b01, 1'b0, "overload holds the car for 3 clocks");
+        check(2'b01, 1'b0, "overload holds the lift for 3 clocks");
         ov = 0;
 
         // Correct PIN: express travel straight to the requested floor

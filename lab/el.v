@@ -2,10 +2,10 @@
 // Target: Intel MAX 10 10M50DAF484C7G (Terasic DE10-Lite).
 //   i_f       : present floor (floor-sensor input)      00 = ground ... 11 = 3rd floor
 //   f_f       : requested (final) floor
-//   ov        : overload sensor  -> hold the car
+//   ov        : overload sensor  -> hold the lift
 //   pin       : 2-bit access PIN -> 2'b10 gives express travel straight to f_f
 //   fa        : fire alarm       -> return to the ground floor
-//   c_f       : current floor of the car
+//   c_f       : current floor of the lift
 //   direction : 1 = moving up, 0 = down / stopped
 module el (
     input [1:0] i_f,
