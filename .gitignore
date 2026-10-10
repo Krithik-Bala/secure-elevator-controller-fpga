@@ -1,0 +1,11 @@
+# simulation outputs
+*.vvp
+*.vcd
+*.log
+work/
+transcript
+# Quartus build outputs
+db/
+incremental_db/
+output_files/
+*.qws
